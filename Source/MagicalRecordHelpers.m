@@ -176,21 +176,21 @@ void replaceSelectorForTargetWithSourceImpAndSwizzle(Class originalClass, SEL or
 
 + (void) setupAutoMigratingCoreDataStack
 {
-    [self setupCoreDataStackWithAutoMigratingSqliteStoreNamed:[self defaultStoreName]];
+    [self setupCoreDataStackWithAutoMigratingSqliteStoreNamed:[self defaultStoreName] configuration:nil];
 }
 
-+ (void) setupCoreDataStackWithStoreNamed:(NSString *)storeName
++ (void) setupCoreDataStackWithStoreNamed:(NSString *)storeName configuration:(NSString *)configuration
 {
-	NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_coordinatorWithSqliteStoreNamed:storeName];
+	NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_coordinatorWithSqliteStoreNamed:storeName configuration:configuration];
 	[NSPersistentStoreCoordinator MR_setDefaultStoreCoordinator:coordinator];
 	
 	NSManagedObjectContext *context = [NSManagedObjectContext MR_contextWithStoreCoordinator:coordinator];
 	[NSManagedObjectContext MR_setDefaultContext:context];
 }
 
-+ (void) setupCoreDataStackWithAutoMigratingSqliteStoreNamed:(NSString *)storeName
++ (void) setupCoreDataStackWithAutoMigratingSqliteStoreNamed:(NSString *)storeName configuration:(NSString *)configuration
 {
-    NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_coordinatorWithAutoMigratingSqliteStoreNamed:storeName];
+    NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_coordinatorWithAutoMigratingSqliteStoreNamed:storeName configuration:configuration];
     [NSPersistentStoreCoordinator MR_setDefaultStoreCoordinator:coordinator];
     
     NSManagedObjectContext *context = [NSManagedObjectContext MR_contextWithStoreCoordinator:coordinator];
